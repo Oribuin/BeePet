@@ -27,8 +27,6 @@ class BeePet : JavaPlugin(), Listener {
                         entity.flower = null
                         entity.hive = null
                         entity.fireTicks = 0
-
-
                     }
                 }
             }
@@ -46,10 +44,6 @@ class BeePet : JavaPlugin(), Listener {
         val bee = CustomBee(player)
         (player.world as CraftWorld).handle.addEntity(bee, CreatureSpawnEvent.SpawnReason.CUSTOM)
         bee.setLocation(loc.x, loc.y, loc.z, loc.yaw, loc.pitch)
-
-        Bukkit.getScheduler().runTaskTimer(this, Runnable {
-            bee.navigation.a(loc.x, loc.y, loc.z, 3)
-        }, 0, 1)
 
 
         bee.bukkitEntity.customName = colorify("#c0ffee${player.name}&e's bee")

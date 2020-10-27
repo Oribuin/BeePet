@@ -26,8 +26,7 @@ internal class FollowPlayerGoal(private val owner: Player, private val petInsent
         val distance = petInsentient.bukkitEntity.location.distance(ownerLocation)
 
         if (ownerLocation.world != petInsentient.bukkitEntity.world) {
-            petInsentient.bukkitEntity.teleport(ownerLocation)
-            return true
+            petInsentient.bukkitEntity.location.world = ownerLocation.world
         }
 
         // Checks if distance is less than the follow distance
