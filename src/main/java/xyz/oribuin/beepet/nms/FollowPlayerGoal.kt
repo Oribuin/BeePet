@@ -5,11 +5,13 @@ import net.minecraft.server.v1_16_R2.EntityInsentient
 import net.minecraft.server.v1_16_R2.PathfinderGoal
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer
 import org.bukkit.entity.Player
+import xyz.oribuin.beepet.BeePet
+import xyz.oribuin.beepet.util.PluginUtils.async
 
 /**
  * @author Matt
  */
-internal class FollowPlayerGoal(private val owner: Player, private val petInsentient: EntityInsentient, private val movementSpeed: Double) : PathfinderGoal() {
+internal class FollowPlayerGoal(private val plugin: BeePet, private val owner: Player, private val petInsentient: EntityInsentient, private val movementSpeed: Double) : PathfinderGoal() {
 
     private val navigation = petInsentient.navigation
 
@@ -23,11 +25,13 @@ internal class FollowPlayerGoal(private val owner: Player, private val petInsent
 
         // Gets the distance between the player and the pet
         val ownerLocation = owner.location
-        val distance = petInsentient.bukkitEntity.location.distance(ownerLocation)
 
         if (ownerLocation.world != petInsentient.bukkitEntity.world) {
             petInsentient.bukkitEntity.location.world = ownerLocation.world
+            return true
         }
+
+        val distance = petInsentient.bukkitEntity.location.distance(ownerLocation)
 
         // Checks if distance is less than the follow distance
         if (distance < followDistance) return true
@@ -40,8 +44,10 @@ internal class FollowPlayerGoal(private val owner: Player, private val petInsent
         }
 
         // Teleports to owner
-        petInsentient.setPosition(ownerLocation.x, ownerLocation.y, ownerLocation.z)
-        petInsentient.bukkitEntity.teleport(ownerLocation)
+        async(plugin, Runnable {
+            petInsentient.setPosition(ownerLocation.x, ownerLocation.y, ownerLocation.z)
+            petInsentient.bukkitEntity.teleport(ownerLocation)
+        })
         return true
 
     }

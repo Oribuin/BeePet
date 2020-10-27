@@ -41,7 +41,7 @@ class BeePet : JavaPlugin(), Listener {
     fun spawnBee(player: Player) {
         val loc = player.location.add(0.0, 2.0, 0.0)
 
-        val bee = CustomBee(player)
+        val bee = CustomBee(this, player)
         (player.world as CraftWorld).handle.addEntity(bee, CreatureSpawnEvent.SpawnReason.CUSTOM)
         bee.setLocation(loc.x, loc.y, loc.z, loc.yaw, loc.pitch)
 

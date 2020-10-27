@@ -1,8 +1,10 @@
 package xyz.oribuin.beepet.util
 
 import org.apache.commons.lang.StringUtils
+import org.bukkit.Bukkit
 import org.bukkit.Color
 import org.bukkit.inventory.ItemStack
+import xyz.oribuin.beepet.BeePet
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,5 +32,10 @@ object PluginUtils {
             return "#FFFFFF"
 
         return "#${String.format("%02x%02x%02x", color.red, color.green, color.blue)}"
+    }
+
+    @JvmStatic
+    fun async(plugin: BeePet, asyncCallback: Runnable) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, asyncCallback)
     }
 }

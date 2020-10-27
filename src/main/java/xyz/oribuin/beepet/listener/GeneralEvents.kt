@@ -4,6 +4,8 @@ import org.bukkit.entity.Bee
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntityPortalEnterEvent
+import org.bukkit.event.entity.EntityPortalEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.EquipmentSlot
@@ -40,6 +42,13 @@ class GeneralEvents(private val plugin: BeePet): Listener {
 
             event.rightClicked.remove()
             event.player.sendMessage(HexUtils.colorify("<r:0.7:l>You have despawned your Bee Pet."))
+        }
+    }
+
+    @EventHandler
+    fun onPortal(event: EntityPortalEvent) {
+        if (event.entity is Bee && event.entity.hasMetadata("beePet")) {
+            event.isCancelled = true
         }
     }
 }
