@@ -3,6 +3,7 @@ package xyz.oribuin.beepet.listener
 import org.bukkit.entity.Bee
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityBreedEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityPortalEnterEvent
 import org.bukkit.event.entity.EntityPortalEvent
@@ -48,6 +49,13 @@ class GeneralEvents(private val plugin: BeePet): Listener {
     @EventHandler
     fun onPortal(event: EntityPortalEvent) {
         if (event.entity is Bee && event.entity.hasMetadata("beePet")) {
+            event.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    fun onBreed(event: EntityBreedEvent) {
+        if (event.mother is Bee && event.mother.hasMetadata("beePet") || event.father is Bee && event.father.hasMetadata("beePet")) {
             event.isCancelled = true
         }
     }
