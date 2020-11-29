@@ -14,7 +14,6 @@ compileJava.options.encoding = 'UTF-8'
 targetCompatibility = JavaVersion.VERSION_1_8
 sourceCompatibility = JavaVersion.VERSION_1_8
 
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -29,7 +28,7 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     // Spigot Stuff
-    shadow 'org.spigotmc:spigot:1.16.2'
+    shadow 'org.spigotmc:spigot:1.16.4'
 }
 
 processResources {
@@ -57,4 +56,4 @@ shadowJar {
 }
 
 //jar.dependsOn project.tasks.getByName('pdm')
-jar.dependsOn project.tasks.getByName('shadowJar')
+jar.dependsOn shadowJar

@@ -27,6 +27,7 @@ class BeeCommand(private val plugin: BeePet) : CommandExecutor {
 
         plugin.spawnBee(sender)
         sender.sendMessage(colorify("<rainbow:0.7:l>Successfully spawned a pet bee."))
+        sender.sendMessage(colorify("&7To despawn the bee, Shift right click it."))
         return true
     }
 

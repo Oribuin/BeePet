@@ -5,15 +5,13 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityBreedEvent
 import org.bukkit.event.entity.EntityDamageEvent
-import org.bukkit.event.entity.EntityPortalEnterEvent
 import org.bukkit.event.entity.EntityPortalEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.inventory.EquipmentSlot
-import xyz.oribuin.beepet.BeePet
 import xyz.oribuin.beepet.util.HexUtils
 
-class GeneralEvents(private val plugin: BeePet): Listener {
+class GeneralEvents : Listener {
 
     @EventHandler(ignoreCancelled = true)
     fun onDamage(event: EntityDamageEvent) {
@@ -37,7 +35,7 @@ class GeneralEvents(private val plugin: BeePet): Listener {
     fun onInteract(event: PlayerInteractAtEntityEvent) {
         if (event.rightClicked is Bee && event.rightClicked.hasMetadata("beePet") && event.player.isSneaking && event.hand == EquipmentSlot.HAND) {
 
-            val customName = event.rightClicked.customName?: return
+            val customName = event.rightClicked.customName ?: return
             if (!customName.toLowerCase().contains(event.player.name.toLowerCase()))
                 return
 

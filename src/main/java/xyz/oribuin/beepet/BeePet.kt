@@ -1,7 +1,8 @@
 package xyz.oribuin.beepet
 
 import org.bukkit.Bukkit
-import org.bukkit.craftbukkit.v1_16_R2.CraftWorld
+import org.bukkit.craftbukkit.v1_16_R3.CraftWorld
+import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Bee
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
@@ -15,7 +16,7 @@ import xyz.oribuin.beepet.util.HexUtils.colorify
 
 class BeePet : JavaPlugin(), Listener {
     override fun onEnable() {
-        Bukkit.getPluginManager().registerEvents(GeneralEvents(this), this);
+        Bukkit.getPluginManager().registerEvents(GeneralEvents(), this);
 
         Bukkit.getPluginCommand("spawnbee")?.setExecutor(BeeCommand(this))
 

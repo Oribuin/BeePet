@@ -1,9 +1,9 @@
 package xyz.oribuin.beepet.nms
 
-import net.minecraft.server.v1_16_R2.Entity
-import net.minecraft.server.v1_16_R2.EntityInsentient
-import net.minecraft.server.v1_16_R2.PathfinderGoal
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer
+import net.minecraft.server.v1_16_R3.Entity
+import net.minecraft.server.v1_16_R3.EntityInsentient
+import net.minecraft.server.v1_16_R3.PathfinderGoal
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer
 import org.bukkit.entity.Player
 import xyz.oribuin.beepet.BeePet
 import xyz.oribuin.beepet.util.PluginUtils.async
@@ -47,6 +47,7 @@ internal class FollowPlayerGoal(private val plugin: BeePet, private val owner: P
         async(plugin, Runnable {
             petInsentient.setPosition(ownerLocation.x, ownerLocation.y, ownerLocation.z)
             petInsentient.bukkitEntity.teleport(ownerLocation)
+            petInsentient.bukkitEntity.location.world = ownerLocation.world
         })
         return true
 
