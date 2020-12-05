@@ -2,7 +2,6 @@ package xyz.oribuin.beepet
 
 import org.bukkit.Bukkit
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld
-import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Bee
 import org.bukkit.entity.Player
 import org.bukkit.event.Listener
