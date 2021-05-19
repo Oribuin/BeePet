@@ -1,0 +1,6 @@
+name: BeePets
+author: 'Oribuin'
+description: Have pet bees follow you around!
+api-version: '1.16'
+version: '1.0'
+main: 'xyz.oribuin.beepet.BeePet'
