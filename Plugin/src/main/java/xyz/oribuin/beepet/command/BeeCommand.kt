@@ -2,6 +2,7 @@ package xyz.oribuin.beepet.command
 
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import xyz.oribuin.beepet.manager.DataManager
 import xyz.oribuin.orilibrary.OriPlugin
 import xyz.oribuin.orilibrary.command.Command
 import xyz.oribuin.orilibrary.util.HexUtils
@@ -20,12 +21,15 @@ import xyz.oribuin.skyblock.nms.NMSAdapter
 )
 class BeeCommand(private val plugin: OriPlugin) : Command(plugin) {
 
+    private val data = this.plugin.getManager(DataManager::class.java)
+
     override fun runFunction(sender: CommandSender, label: String, args: Array<String>) {
-
         val player = sender as Player
-        val bee = NMSAdapter.handler.createBee(plugin, player, BeeOptions(1.0, 5.0, 10.0), CustomOptions(HexUtils.colorify("<r:0.7>beeeeeeeeee")))
 
+        val settings = data.getSettings(player) ?: data.saveSettings(player.uniqueId, CustomOptions(HexUtils.colorify("#c0ffeeBee")))
 
+        NMSAdapter.handler.createBee(plugin, player, BeeOptions(1.0, 5.0, 10.0), settings)
     }
+
 
 }

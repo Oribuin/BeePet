@@ -8,11 +8,11 @@ compileJava {
 dependencies {
     // Other modules
     implementation project(':NMS-Wrapper')
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
 
     // Referenced Dependencies
     compileOnly 'org.spigotmc:spigot:1.16.4'
-    implementation fileTree(dir: 'libs', includes: ['*.jar'])
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    compileOnly 'me.clip:placeholderapi:2.10.9'
 }
 
 shadowJar {

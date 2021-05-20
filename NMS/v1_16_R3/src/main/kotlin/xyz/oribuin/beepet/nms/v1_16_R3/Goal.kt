@@ -22,7 +22,12 @@ class Goal(
         val navigation = entity.navigation
         val bukkitEntity = entity.bukkitEntity as Bee
 
-        if (sitting) return true
+        if (sitting && bukkitEntity.hasAI()) {
+            bukkitEntity.setAI(false)
+            return true
+        }
+
+        bukkitEntity.setAI(true)
 
         // If in different worlds,
         if (bukkitEntity.world != owner.world) {
@@ -38,7 +43,7 @@ class Goal(
         // Walk to the player
         if (distance < tpDistance) {
 
-            val loc = owner.location.clone().add(-Random().nextInt(3).toDouble(), 0.0, Random().nextInt(3).toDouble())
+            val loc = owner.location.clone().add(-Random().nextInt(1).toDouble(), 0.0, Random().nextInt(1).toDouble())
 
             val temp = bukkitEntity.world.spawn(loc, ArmorStand::class.java) {
                 it.isInvulnerable = true

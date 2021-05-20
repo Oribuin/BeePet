@@ -1,6 +1,6 @@
 package xyz.oribuin.beepet.nms.v1_16_R3
 
-import net.minecraft.server.v1_16_R3.NBTTagCompound
+import io.github.bananapuncher714.nbteditor.NBTEditor
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld
 import org.bukkit.entity.Bee
 import org.bukkit.entity.Player
@@ -23,18 +23,15 @@ class NMSHandlerImpl : NMSHandler {
         (owner.world as CraftWorld).handle.addEntity(bee, CreatureSpawnEvent.SpawnReason.CUSTOM)
         bee.setLocation(loc.x, loc.y, loc.z, loc.yaw, loc.pitch)
 
-        val compound = NBTTagCompound()
-        compound.setString("beepet", owner.uniqueId.toString())
-        bee.save(compound)
-
         // Add the correct values and meta data
-        val bukkit = bee.bukkitEntity as Bee
+        var bukkit = bee.bukkitEntity as Bee
+        bukkit = NBTEditor.set(bukkit, owner.uniqueId.toString(), "beepet")
         bukkit.setMetadata("beepet", FixedMetadataValue(plugin, owner.uniqueId.toString()))
 
         bukkit.isCustomNameVisible = true
         bukkit.customName = custom.name
 
-        return bee.bukkitEntity as Bee
+        return bukkit
     }
 
 }
