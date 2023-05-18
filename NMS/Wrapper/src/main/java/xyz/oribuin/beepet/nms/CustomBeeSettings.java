@@ -14,7 +14,7 @@ public class CustomBeeSettings {
         this.name = name;
         this.sitting = false;
         this.speed = 1;
-        this.followDistance = 10;
+        this.followDistance = 7;
         this.teleportDistance = 32;
     }
 

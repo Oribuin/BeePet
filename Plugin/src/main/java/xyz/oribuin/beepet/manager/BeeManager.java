@@ -40,7 +40,6 @@ public class BeeManager extends Manager {
         NMSAdapter.getHandler().spawn(player, player.getLocation(), settings, bee -> {
             // Create a new user bee
             UserBee userBee = new UserBee(player.getUniqueId(), bee.getUniqueId(), settings);
-
             this.userBees.put(player.getUniqueId(), userBee);
 
             // TODO: Add locale messaging.
