@@ -32,14 +32,16 @@ public class FollowGoal extends Goal {
         if (this.bee.isSitting())
             navigation.stop(); // Stop the bee from moving
 
-        if (bukkitEntity.getWorld() != this.owner.getWorld())  {
-            bukkitEntity.teleport(this.owner); // Teleport the bee to the owner if they are in a different world
+        double distance = bukkitEntity.getLocation().distance(this.owner.getLocation());
+
+        // Teleport the bee to the owner if they are too far away
+        if (distance >= this.bee.getTeleportDistance()) {
+            bukkitEntity.teleport(this.owner);
             return true;
         }
 
-        double distance = bukkitEntity.getLocation().distance(this.owner.getLocation());
-
-        if (distance >= this.bee.getTeleportDistance() || distance <= this.bee.getFollowDistance())
+        // Don't follow if the owner is too close
+        if (distance <= this.bee.getFollowDistance())
             return true;
 
         // Walk to random spot around the owner
