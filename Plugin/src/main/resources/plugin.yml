@@ -1,0 +1,6 @@
+name: BeePet
+main: xyz.oribuin.beepet.BeePetPlugin
+version: '@version@'
+api-version: '1.17'
+author: Oribuin
+description: A plugin that does stuff
