@@ -49,6 +49,9 @@ public class FollowGoal extends Goal {
         if (distance <= this.bee.getFollowDistance())
             return true;
 
+        //  Don't always follow the owner
+        if (RANDOM.nextInt() > 0.5) return true;
+
         // Walk to random spot around the owner
         Location location = this.owner.getLocation().clone().add(
                 -RANDOM.nextInt(10) + 5,
